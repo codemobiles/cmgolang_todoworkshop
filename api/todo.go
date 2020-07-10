@@ -2,7 +2,7 @@ package api
 
 import (
 	// "fmt"
-	// "go-todo-workshop/database"
+	"go-todo-workshop/database"
 	// "io"
 	// "log"
 	"net/http"
@@ -24,16 +24,16 @@ func GetAllLists(c *gin.Context) {
 }
 
 func CreateTodoList(c *gin.Context) {
-	// var input CreateTodo
-	// if err := c.ShouldBindJSON(&input); err != nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": err.Error})
-	// 	return
-	// }
+	var input CreateTodo
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error})
+		return
+	}
 
-	// todoList := database.Todo{Username: input.Username, Title: input.Title, Message: input.Message}
-	// database.DB.Create(&todoList)
+	todoList := database.Todo{Username: input.Username, Title: input.Title, Message: input.Message}
+	database.DB.Create(&todoList)
 
-	c.JSON(http.StatusOK, gin.H{"To Do List": "ok"})
+	c.JSON(http.StatusOK, gin.H{"To Do List": todoList})
 }
 
 func GetTodoList(c *gin.Context) {
