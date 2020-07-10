@@ -17,10 +17,10 @@ type CreateTodo struct {
 }
 
 func GetAllLists(c *gin.Context) {
-	// var todoLists []database.Todo
-	// database.DB.Find(&todoLists)
+	var todoLists []database.Todo
+	database.DB.Find(&todoLists)
 
-	c.JSON(http.StatusOK, gin.H{"To Do Lists": "ok 55"})
+	c.JSON(http.StatusOK, gin.H{"Result": todoLists})
 }
 
 func CreateTodoList(c *gin.Context) {
