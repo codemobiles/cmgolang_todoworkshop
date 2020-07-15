@@ -1,8 +1,8 @@
 package main
 
 import (
-	"go-todo-workshop/database"
 	"go-todo-workshop/api"
+	"go-todo-workshop/database"
 	"net/http"
 
 	"github.com/gin-contrib/cors"
@@ -21,7 +21,7 @@ func main() {
 	r.GET("/", api.GetAllLists)
 	r.GET("/user", api.GetTodoList)
 	r.POST("/", api.CreateTodoList)
-	r.DELETE("/:id", api.DeleteList)
+	r.DELETE("delete/:id", api.DeleteList)
 	r.POST("/upload", api.Upload)
 	r.StaticFS("/file", http.Dir("public"))
 

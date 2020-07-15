@@ -37,25 +37,25 @@ func CreateTodoList(c *gin.Context) {
 }
 
 func GetTodoList(c *gin.Context) {
-	// var todoLists []database.Todo
+	var todoLists []database.Todo
 
-	// if err := database.DB.Where("username = ?", c.Query("username")).Find(&todoLists).Error; err != nil {
-	// 	c.JSON(http.StatusOK, gin.H{"error": "Record not found!"})
-	// 	return
-	// }
+	if err := database.DB.Where("username = ?", c.Query("username")).Find(&todoLists).Error; err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": "Record not found!"})
+		return
+	}
 
-	c.JSON(http.StatusOK, gin.H{"List": "ok"})
+	c.JSON(http.StatusOK, gin.H{"List": todoLists})
 }
 
 func DeleteList(c *gin.Context) {
-	// var todoList database.Todo
+	var todoList database.Todo
 
-	// if err := database.DB.Where("id = ?", c.Param("id")).First(&todoList).Error; err != nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
-	// 	return
-	// }
+	if err := database.DB.Where("id = ?", c.Param("id")).First(&todoList).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
 
-	// database.DB.Delete(&todoList)
+	database.DB.Delete(&todoList)
 
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
